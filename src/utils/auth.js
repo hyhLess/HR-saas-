@@ -1,15 +1,21 @@
-import Cookies from 'js-cookie'
-
-const TokenKey = 'vue_admin_template_token'
+const TokenKey = 'hrsaas-ihrm-token'
+const timeKey = 'hrsaas-timestamp-token'
 
 export function getToken() {
-  return Cookies.get(TokenKey)
+  return localStorage.getItem(TokenKey)
 }
 
 export function setToken(token) {
-  return Cookies.set(TokenKey, token)
+  return localStorage.setItem(TokenKey, token)
 }
 
 export function removeToken() {
-  return Cookies.remove(TokenKey)
+  return localStorage.removeItem(TokenKey)
+}
+export function getTimeStamp() {
+  return localStorage.getItem(timeKey)
+
+}
+export function setTimeStamp() {
+  return localStorage.setItem(timeKey, Date.now())
 }
