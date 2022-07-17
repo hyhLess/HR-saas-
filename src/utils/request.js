@@ -6,12 +6,12 @@ import { Message } from 'element-ui'
 import store from "@/store"
 import { getTimeStamp } from "./auth"
 import router from "@/router"
-const service = axios.create({
+const request = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // 设置axios请求的基础的基础地址
   timeout: 5000 // 定义5秒超时
 })
 const timeOut = 3600000
-service.interceptors.request.use((config) => {
+request.interceptors.request.use((config) => {
   if (store.getters.token) {
     if (isCheckTimeOut()) {
       // 如果它为true表示 过期了
@@ -26,7 +26,7 @@ service.interceptors.request.use((config) => {
   return config
 })
 // 响应拦截器
-service.interceptors.response.use(response => {
+request.interceptors.response.use(response => {
   // axios默认加了一层data
   const { success, message, data } = response.data
   //   要根据success的成功与否决定下面的操作
@@ -52,4 +52,4 @@ function isCheckTimeOut() {
   var timesTamp = getTimeStamp()
   return (currentTime - timesTamp) > timeOut
 }
-export default service
+export default request
