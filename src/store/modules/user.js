@@ -47,6 +47,7 @@ export default {
       const baseInfo = await getUserDetailById(data.userId)
       const baseRes = { ...data, ...baseInfo }
       commit('SAVEUSERINFO', baseRes)
+      return data
     },
 
 

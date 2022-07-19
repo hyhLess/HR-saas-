@@ -1,10 +1,6 @@
 <template>
   <div class="navbar">
-    <hamburger
-      :is-active="sidebar.opened"
-      class="hamburger-container"
-      @toggleClick="toggleSideBar"
-    />
+    <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
     <div class="app-breadcrumb">
       佳乐科技股份有限公司
       <span class="breadBtn">体验版</span>
@@ -14,7 +10,7 @@
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          <img src="@/assets/common/bigUserHeader.png" class="user-avatar" />
+          <img :src="staffPhoto ? staffPhoto : defaultImg" class="user-avatar">
           <span class="name">{{ name }}</span>
           <i class="el-icon-caret-bottom" style="color: #fff" />
         </div>
@@ -44,6 +40,11 @@ export default {
     Breadcrumb,
     Hamburger,
   },
+  data() {
+    return {
+      defaultImg: require('@/assets/common/head.jpg')
+    }
+  },
   computed: {
     ...mapGetters(["sidebar", "staffPhoto", "name"]),
   },
@@ -66,6 +67,7 @@ export default {
   position: relative;
   background-image: -webkit-linear-gradient(left, #3d6df8, #5b8cff);
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+
   .app-breadcrumb {
     display: inline-block;
     font-size: 18px;
@@ -73,6 +75,7 @@ export default {
     margin-left: 10px;
     color: #ffffff;
     cursor: text;
+
     .breadBtn {
       background: #84a9fe;
       font-size: 14px;
@@ -84,6 +87,7 @@ export default {
       margin-left: 15px;
     }
   }
+
   .hamburger-container {
     line-height: 46px;
     height: 100%;
@@ -130,14 +134,17 @@ export default {
 
     .avatar-container {
       margin-right: 30px;
+
       .name {
         color: #fff;
         vertical-align: middle;
         margin-left: 5px;
       }
+
       .user-dropdown {
         color: #fff;
       }
+
       .avatar-wrapper {
         margin-top: 5px;
         position: relative;
