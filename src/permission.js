@@ -11,8 +11,11 @@ router.beforeEach(async (to, from, next) => {
         } else {
             if (!store.getters.userId) {
                 // 如果没有id这个值 才会调用 vuex的获取资料的action
-                await store.dispatch('user/getUserInfo')
+                const { roles } = await store.dispatch('user/getUserInfo')
                 // 为什么要写await 因为我们想获取完资料再去放行
+                const routes = await store.dispatch('permission/filterRoutes', roles.menus)
+                router.addRoutes([...routes, { path: '*', redirect: '/404', hidden: true }])
+                next(to.path)
             }
             next()
         }

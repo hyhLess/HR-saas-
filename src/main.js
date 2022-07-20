@@ -18,7 +18,9 @@ import Component from '@/components'
 import * as filters from '@/filters' // 引入工具类
 import * as directives from '@/directives'
 import Print from 'vue-print-nb'
+import checkPermission from './mixin/checkPermission'
 Vue.use(Print);
+Vue.mixin(checkPermission)
 // 注册全局的过滤器
 Object.keys(filters).forEach(key => {
   // 注册过滤器

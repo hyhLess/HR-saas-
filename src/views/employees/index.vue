@@ -6,7 +6,8 @@
         <template slot="after">
           <el-button size="small" type="warning" @click="$router.push('/import?type=user')">导入</el-button>
           <el-button size="small" type="danger" @click="exportData">导出</el-button>
-          <el-button size="small" @click="showDialog = true" type="primary">新增员工</el-button>
+          <el-button size="small" @click="showDialog = true" :disabled="!checkPermission('123')" type="primary">新增员工
+          </el-button>
         </template>
       </page-tools>
       <!-- 放置表格和分页 -->
@@ -91,6 +92,7 @@ export default {
       },
     };
   },
+  mixins: ['checkPermission'],
   created() {
     this.getEmployeeList();
   },

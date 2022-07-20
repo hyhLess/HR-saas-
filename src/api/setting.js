@@ -32,3 +32,11 @@ export const deleteRole = (id) => request({
     url: `/sys/role/${id}`,
     method: 'DELETE'
 })
+// 给角色分配权限
+export function assignPerm(data) {
+    return request({
+        url: '/sys/role/assignPrem',
+        method: 'put',
+        data
+    })
+}

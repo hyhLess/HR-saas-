@@ -1,4 +1,5 @@
 import { getInfo, getUserDetailById, login } from "@/api/user"
+import { resetRouter } from "@/router"
 import { getToken, removeToken, setTimeStamp, setToken } from "@/utils/auth"
 
 export default {
@@ -56,6 +57,9 @@ export default {
       commit('DELTOKEN')
       // // 删除用户资料
       commit('DELUSERINFO') // 删除用户信息
+      resetRouter()
+
+      commit('permission/setRoutes', [], { root: true })
     }
   }
 }
